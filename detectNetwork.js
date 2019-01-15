@@ -19,19 +19,10 @@ var detectNetwork = function(cardNumber) {
   } else if ((cardNumLength===13 && firstDigit==='4') || (cardNumLength===16 && firstDigit==='4') || (cardNumLength===19 && firstDigit==='4')) {
   	  network = "Visa";
   } else if (cardNumLength === 16) {
-  	  if (firstTwoDigits===51 || firstTwoDigits===52 || firstTwoDigits===53 || firstTwoDigits===54 || firstTwoDigits===55) {
+  	  if (firstTwoDigits==='51' || firstTwoDigits==='52' || firstTwoDigits==='53' || firstTwoDigits==='54' || firstTwoDigits==='55') {
   	  	network = "MasterCard";
   	  }
   }
   return network;
 };
-
-// STEP TWO:
-// Nice work! Extend your function to support two popular networks, Visa and Mastercard:
-
-// Visa always has a prefix of 4 and a length of 13, 16, or 19.
-// MasterCard always has a prefix of 51, 52, 53, 54, or 55 and a length of 16.
-
-// Make sure that you continue to support Diner's Club and American Express cards. Keep testing your implementation here in the console.
-
 
