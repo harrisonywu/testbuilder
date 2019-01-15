@@ -16,6 +16,12 @@ var detectNetwork = function(cardNumber) {
     	network = "Diner's Club";    
   } else if ((cardNumLength === 15 && firstTwoDigits === '34') || (cardNumLength === 15 && firstTwoDigits === '37')) {
         network = "American Express";
+  } else if ((cardNumLength===13 && firstDigit==='4') || (cardNumLength===16 && firstDigit==='4') || (cardNumLength===19 && firstDigit==='4')) {
+  	  network = "Visa";
+  } else if (cardNumLength === 16) {
+  	  if (firstTwoDigits===51 || firstTwoDigits===52 || firstTwoDigits===53 || firstTwoDigits===54 || firstTwoDigits===55) {
+  	  	network = "MasterCard";
+  	  }
   }
   return network;
 };
