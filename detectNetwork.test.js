@@ -237,6 +237,76 @@ describe('China UnionPay', function() {
 
 
 
-describe('should support Switch')
+// describe('Switch', function() {
+//   var should = chai.should();
+//   var prefixList = [4903,4905,4911,4936,564182,633110,6333,6759]
+//   for (var i =0; i<prefixList.length;i++) {
+//     //variables below depend on length of prefix and length of entire card number
+//     var prefix = prefixList[i].toString();
+//     var numOfGivenLength = prefix.slice(0);
+//     for (var j=0;j<16-prefix.length;j++) {
+//       var numOfGivenLength = numOfGivenLength.slice(0) + '1';
+//     }
+//     // length = 16 test
+//     (function(prefix, numOfGivenLength) {
+//       it('has a prefix of ' + prefix + ' and a length of 16', function() {
+//         detectNetwork(numOfGivenLength).should.equal('Switch');
+//       });
+//     })(numOfGivenLength,prefixList[i])
+//     // length = 18 test
+//     var numOfGivenLength = numOfGivenLength.slice(0) + '12';
+//     (function(prefix, numOfGivenLength) {
+//       it('has a prefix of ' + prefix + ' and a length of 18', function() {
+//         detectNetwork(numOfGivenLength).should.equal('Switch');
+//       });
+//     })(numOfGivenLength,prefixList[i])
+
+//     //length = 19 test
+//     var numOfGivenLength = numOfGivenLength.slice(0) + '1';
+//     (function(prefix, numOfGivenLength) {
+//       it('has a prefix of ' + prefix + ' and a length of 19', function() {
+//         detectNetwork(numOfGivenLength).should.equal('Switch');
+//       });
+//     })(numOfGivenLength,prefixList[i])
+//   }
+// });
 
 
+describe('Switch', function() {
+  var should = chai.should();
+
+  var prefixList = [4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
+
+  //iterate through every prefix in the list
+  for (var i = 0; i < prefixList.length; i++){
+    //forming a 16 length number with this prefix using loop
+    var prefix = prefixList[i].toString();
+    var numOfGivenLength = prefix;
+    for (var j = 0; j < 16 - prefix.length; j++) {
+      numOfGivenLength = numOfGivenLength + '0';
+    }
+
+    (function (numOfGivenLength,prefix) {
+      it ('has a prefix of ' + prefix + ' and a length of 16', function() {
+        detectNetwork(numOfGivenLength).should.equal('Switch');
+      });
+    })(numOfGivenLength,prefixList[i])
+
+    //forming a 18 length number with this prefix by adding two digits
+    numOfGivenLength = numOfGivenLength + '00';
+    (function (numOfGivenLength,prefix) {
+      it ('has a prefix of ' + prefix + ' and a length of 18', function() {
+        detectNetwork(numOfGivenLength).should.equal('Switch');
+      });
+    })(numOfGivenLength,prefixList[i])
+    
+    //forming a 19 length number with this prefix by adding one digit
+    numOfGivenLength = numOfGivenLength + '0';
+    (function (numOfGivenLength,prefix) {
+      it ('has a prefix of ' + prefix + ' and a length of 19', function() {
+        detectNetwork(numOfGivenLength).should.equal('Switch');
+      });
+    })(numOfGivenLength,prefixList[i])
+  }
+
+});
