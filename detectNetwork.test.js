@@ -192,7 +192,51 @@ describe('Maestro', function() {
 });
 
 
-describe('should support China UnionPay')
+// China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 and a length of 16-19.
+// Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19.
+
+// Heads up! Switch and Visa seem to have some overlapping card numbers - in any apparent conflict, you should choose the network with the longer prefix.
+describe('China UnionPay', function() {
+  var should = chai.should();
+  for (var prefix = 622126; prefix <= 622925; prefix++) {
+    var numOfGivenLength = '1234567890';
+    for (var length = 16; length<=19; length++) {
+      (function(prefix, length, numOfGivenLength) {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+          detectNetwork(prefix + numOfGivenLength).should.equal('China UnionPay');
+        });
+      })(prefix,length,numOfGivenLength)
+      numOfGivenLength = numOfGivenLength + '1';
+    }      
+  }
+
+  for (var prefix = 624; prefix <= 626; prefix++) {
+    var numOfGivenLength = '1234567890123';
+    for (var length = 16; length<=19; length++) {
+      (function(prefix,length,numOfGivenLength) {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+          detectNetwork(prefix + numOfGivenLength).should.equal('China UnionPay');
+        });
+      })(prefix,length,numOfGivenLength)
+      numOfGivenLength = numOfGivenLength +'1';
+    }
+  }
+
+  for (var prefix = 6282; prefix<= 6288;prefix++) {
+    var numOfGivenLength = '123456789012';
+    for (var length = 16; length<=19;length++) {
+      (function(prefix,length,numOfGivenLength) {
+        it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+          detectNetwork(prefix + numOfGivenLength).should.equal('China UnionPay');
+        });
+      })(prefix,length,numOfGivenLength)
+      numOfGivenLength = numOfGivenLength + '1';
+    }
+  }
+})
+
+
+
 describe('should support Switch')
 
 
