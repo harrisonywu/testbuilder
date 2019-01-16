@@ -169,21 +169,28 @@ describe('Discover', function() {
   });
 });
 
-// describe('Maestro', function() {
-//   // Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
-//   var should = chai.should();
-//   for (var length = 12; length<=19; length++) {
-//     (function(prefix) {
-//       it('has a prefix of 5018 and a length of ' + length);
-//     })
-//   }
+describe('Maestro', function() {
+  var should = chai.should();
+  var numOfGivenLength = '12345678';
+  for (var length = 12; length<=19; length++) {
+    (function(length,numOfGivenLength) {
+      it('has a prefix of 5018 and a length of ' + length, function() {
+        detectNetwork('5018' + numOfGivenLength).should.equal('Maestro');
+      });
+      it('has a prefix of 5020 and a length of ' + length, function() {
+        detectNetwork('5020'+ numOfGivenLength).should.equal('Maestro');
+      });
+      it('has a prefix of 5038 and a length of ' + length, function() {
+        detectNetwork('5038' + numOfGivenLength).should.equal('Maestro');
+      });
+      it('has a prefix of 6304 and a length of ' + length, function() {
+        detectNetwork('6304' + numOfGivenLength).should.equal('Maestro');
+      });
+    })(length,numOfGivenLength)
+    numOfGivenLength = numOfGivenLength +'1';
+  }
+});
 
-
-//   it('has a prefix of 5018 and a length of 12', function() {
-//     detectNetwork('501812345678').should.equal('Maestro');
-//   });
-//   it('has a prefix of 5020 and ')
-// });
 
 describe('should support China UnionPay')
 describe('should support Switch')
